@@ -1,6 +1,10 @@
+package cz.jacktech.gcmnetworkmanager;
+
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
@@ -26,7 +30,24 @@ public class DataUpdateService extends GcmTaskService {
 
     @Override
     public int onRunTask(TaskParams taskParams) {
-        //do some stuff
+        //do some stuff (mostly network) - executed in background thread (async)
+
+        Handler h = new Handler(getMainLooper());
+        if(taskParams.getTag().equals(GCM_ONEOFF_TAG)) {
+            h.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(DataUpdateService.this, "ONEOFF executed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else if(taskParams.getTag().equals(GCM_REPEAT_TAG)) {
+            h.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(DataUpdateService.this, "REPEATING executed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         return GcmNetworkManager.RESULT_SUCCESS;
     }
 
@@ -39,7 +60,7 @@ public class DataUpdateService extends GcmTaskService {
 		    //tag that is unique to this task (can be used to cancel task)
                     .setTag(GCM_ONEOFF_TAG)
 		    //executed between 0 - 10s from now
-                    .setExecutionWindow(0, 10)
+                    .setExecutionWindow(30, 60)
 		    //set required network state, this line is optional
 		    .setRequiredNetwork(Task.NETWORK_STATE_CONNECTED)
 		    //request that charging must be connected, this line is optional
@@ -60,9 +81,9 @@ public class DataUpdateService extends GcmTaskService {
 		    //specify target service - must extend GcmTaskService
                     .setService(DataUpdateService.class)
 		    //repeat every 7200 seconds
-                    .setPeriod(7200)
+                    .setPeriod(60)
 		    //specify how much earlier the task can be executed (in seconds)
-                    .setFlex(1800)
+                    .setFlex(30)
 		    //tag that is unique to this task (can be used to cancel task)
                     .setTag(GCM_REPEAT_TAG)
 		    //whether the task persists after device reboot
@@ -81,4 +102,11 @@ public class DataUpdateService extends GcmTaskService {
         }
     }
 
+    public static void cancelOneOff(Context context) {
+        GcmNetworkManager.getInstance(context).cancelTask(GCM_ONEOFF_TAG, DataUpdateService.class);
+    }
+
+    public static void cancelRepeat(Context context) {
+        GcmNetworkManager.getInstance(context).cancelTask(GCM_REPEAT_TAG, DataUpdateService.class);
+    }
 }

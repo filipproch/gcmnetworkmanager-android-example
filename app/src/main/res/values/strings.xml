@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GCMNetworkManager</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="schedule_oneoff">SCHEDULE ONEOFF</string>
+    <string name="cancel_oneoff">Cancel ONEOFF</string>
+    <string name="cancel_repeat">cancel_repeat</string>
+</resources>
