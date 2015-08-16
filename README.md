@@ -2,11 +2,11 @@
 An example for GCMNetworkManager introduced on I/O 2015
 
 Use the code below together with the example provided to schedule a OneOff task from your Activity, Fragment, anywhere
-```android
+```java
 MyTaskService.scheduleOneOff(context);
 ```
 And the code below to schedule repeating task that persists after reboot
-```android
+```java
 MyTaskService.scheduleRepeat(context);
 ```
 
@@ -29,7 +29,7 @@ It differs on what Android version it is used. For pre-Lollipop versions, an Goo
 ### Does it require Google Play services?
 Yes it does, there must be (as for now) installed Google Play services to make this work (even on Lollipop+). Before you start being angry about this, you must think about it for a moment. The way this feature works is that there is a service running which have all tasks for all apps registered and calls them when time comes. There is no such thing on pre-Lollipop versions and so Google implemented this. This way, Google can also fix bugs in the API etc. much faster, just by updating GPS.
 Use
-```android
+```java
 GoogleApiAvailability api = GoogleApiAvailability.getInstance();
 int errorCheck = api.isGooglePlayServicesAvailable(this);
 if(errorCheck == ConnectionResult.SUCCESS) {
