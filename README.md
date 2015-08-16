@@ -30,7 +30,21 @@ It differs on what Android version it is used. For pre-Lollipop versions, an Goo
 Yes it does, there must be (as for now) installed Google Play services to make this work (even on Lollipop+). Before you start being angry about this, you must think about it for a moment. The way this feature works is that there is a service running which have all tasks for all apps registered and calls them when time comes. There is no such thing on pre-Lollipop versions and so Google implemented this. This way, Google can also fix bugs in the API etc. much faster, just by updating GPS.
 Use
 ```
-GcmNetworkManager.isGooglePlayServicesAvailable(context)
+GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+int errorCheck = api.isGooglePlayServicesAvailable(this);
+if(errorCheck == ConnectionResult.SUCCESS) {
+    //google play services available, hooray
+} else if(api.isUserResolvableError(errorCheck)) {
+    //GPS_REQUEST_CODE = 1000, and is used in onActivityResult
+    api.showErrorDialogFragment(this, errorCheck, GPS_REQUEST_CODE);
+    //stop our activity initialization code
+    return;
+} else {
+    //GPS not available, user cannot resolve this error
+    //todo: somehow inform user or fallback to different method
+    //stop our activity initialization code
+    return;
+}
 ```
 to check whether GPS are installed, if not, use another solution
 
