@@ -1,4 +1,4 @@
-# gcmnetworkmanager-android-example
+# GcmNetworkManager example
 ### NOTICE: information based on GPS v7.8.0
 
 **An example for GCMNetworkManager introduced on I/O 2015
