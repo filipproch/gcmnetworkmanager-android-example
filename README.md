@@ -2,16 +2,16 @@
 An example for GCMNetworkManager introduced on I/O 2015
 
 Use the code below together with the example provided to schedule a OneOff task from your Activity, Fragment, anywhere
-```
+```android
 MyTaskService.scheduleOneOff(context);
 ```
 And the code below to schedule repeating task that persists after reboot
-```
+```android
 MyTaskService.scheduleRepeat(context);
 ```
 
 Use
-```
+```bash
 adb shell dumpsys activity service GcmService --endpoints MyTaskService
 ```
 to check for scheduled tasks from your PC (replace DataUpdateService with your service class name)
@@ -29,7 +29,7 @@ It differs on what Android version it is used. For pre-Lollipop versions, an Goo
 ### Does it require Google Play services?
 Yes it does, there must be (as for now) installed Google Play services to make this work (even on Lollipop+). Before you start being angry about this, you must think about it for a moment. The way this feature works is that there is a service running which have all tasks for all apps registered and calls them when time comes. There is no such thing on pre-Lollipop versions and so Google implemented this. This way, Google can also fix bugs in the API etc. much faster, just by updating GPS.
 Use
-```
+```android
 GoogleApiAvailability api = GoogleApiAvailability.getInstance();
 int errorCheck = api.isGooglePlayServicesAvailable(this);
 if(errorCheck == ConnectionResult.SUCCESS) {
@@ -60,9 +60,9 @@ You can make your tasks persistent upon reboots by setting ```setPersisted(true)
 ### What to return from onRunTask? Differences
 So first, what can you return there. You have three options: ```GcmNetworkManager.RESULT_FAILURE```, ```GcmNetworkManager.RESULT_SUCCESS``` and ```GcmNetworkManager.RESULT_RESCHEDULE```
 
-```GcmNetworkManager.RESULT_FAILURE``` : means that your task failed and you don't want it to get rescheduled, if your task is OneOff, then it won't get rescheduled and nothing more happens, for a Repeating task, it's the same behaviour, all ongoing tasks (to be repeated) are kept in queque<br/>
-```GcmNetworkManager.RESULT_SUCCESS``` : means your task completed succesfully, it won't be rescheduled (because why), behaviour is the same as for ```GcmNetworkManager.RESULT_FAILURE```<br/>
-```GcmNetworkManager.RESULT_RESCHEDULE``` : mean your task failed, reschedules your task, so it will be executed again when conditions are met<br/>
+```java GcmNetworkManager.RESULT_FAILURE``` : means that your task failed and you don't want it to get rescheduled, if your task is OneOff, then it won't get rescheduled and nothing more happens, for a Repeating task, it's the same behaviour, all ongoing tasks (to be repeated) are kept in queque<br/>
+```java GcmNetworkManager.RESULT_SUCCESS``` : means your task completed succesfully, it won't be rescheduled (because why), behaviour is the same as for ```GcmNetworkManager.RESULT_FAILURE```<br/>
+```java GcmNetworkManager.RESULT_RESCHEDULE``` : mean your task failed, reschedules your task, so it will be executed again when conditions are met<br/>
 
 
 ### Can I pass something (eg. Bundle) using TaskParams?
