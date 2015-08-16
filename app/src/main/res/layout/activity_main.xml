@@ -33,5 +33,11 @@
         android:text="@string/cancel_repeat"
         android:id="@+id/cancel_repeat"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_all"
+        android:id="@+id/cancel_all"/>
+
 
 </LinearLayout>

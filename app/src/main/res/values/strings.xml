@@ -7,4 +7,5 @@
     <string name="cancel_oneoff">Cancel ONEOFF</string>
     <string name="cancel_repeat">cancel_repeat</string>
     <string name="schedule_repeat">schedule REPEAT</string>
+    <string name="cancel_all">cancel all tasks</string>
 </resources>
