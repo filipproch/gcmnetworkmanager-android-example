@@ -1,5 +1,5 @@
 # gcmnetworkmanager-android-example
-### NOTICE: information based on GPS 7.8.0
+### NOTICE: information based on GPS v7.8.0
 
 **An example for GCMNetworkManager introduced on I/O 2015
 I wrote a nice blogpost about using this API, check it out http://jacktech24.blogspot.cz/2015/08/working-with-gcmnetworkmanager-on.html**
