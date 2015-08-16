@@ -12,7 +12,7 @@ MyTaskService.scheduleRepeat(context);
 
 Use
 ```bash
-adb shell dumpsys activity service GcmService --endpoints MyTaskService
+user@machine:~$ adb shell dumpsys activity service GcmService --endpoints MyTaskService
 ```
 to check for scheduled tasks from your PC (replace DataUpdateService with your service class name)
 
