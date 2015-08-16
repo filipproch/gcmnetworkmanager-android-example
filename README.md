@@ -1,5 +1,8 @@
 # gcmnetworkmanager-android-example
-An example for GCMNetworkManager introduced on I/O 2015
+### NOTICE: information based on GPS 7.8.0
+
+**An example for GCMNetworkManager introduced on I/O 2015
+I wrote a nice blogpost about using this API, check it out http://jacktech24.blogspot.cz/2015/08/working-with-gcmnetworkmanager-on.html**
 
 Use the code below together with the example provided to schedule a OneOff task from your Activity, Fragment, anywhere
 ```java
@@ -14,21 +17,25 @@ Use
 ```bash
 user@machine:~$ adb shell dumpsys activity service GcmService --endpoints MyTaskService
 ```
-to check for scheduled tasks from your PC (replace DataUpdateService with your service class name)
+to check for scheduled tasks from your PC (replace MyTaskService with your service class name)
 
 More info and documentation : https://developers.google.com/cloud-messaging/network-manager
 
 ## FAQ
 
 ### Do I need to use GCM (Google Cloud Messaging) to use this?
-No, you don't have to care about GCM when working with this API.
+No, you don't have to care about GCM when working with this API. But if you have in dependencies only
+parts of Google Play services library (to save space and methods), you must have:
+```groovy
+compile 'com.google.android.gms:play-services-gcm:{insert latest version here}'
+```
 
 ### What's in the background of GCMNetworkManager
 It differs on what Android version it is used. For pre-Lollipop versions, an Google proprietary solution is used. On Lollipop and onwards, JobScheduler API is used.
 
 ### Does it require Google Play services?
 Yes it does, there must be (as for now) installed Google Play services to make this work (even on Lollipop+). Before you start being angry about this, you must think about it for a moment. The way this feature works is that there is a service running which have all tasks for all apps registered and calls them when time comes. There is no such thing on pre-Lollipop versions and so Google implemented this. This way, Google can also fix bugs in the API etc. much faster, just by updating GPS.
-Use
+Use something like this (this is taken from this example app, found in MainActivity)
 ```java
 GoogleApiAvailability api = GoogleApiAvailability.getInstance();
 int errorCheck = api.isGooglePlayServicesAvailable(this);
