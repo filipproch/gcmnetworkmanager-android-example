@@ -53,7 +53,8 @@ So first, what can you return there. You have three options: ```GcmNetworkManage
 
 ### Can I pass something (eg. Bundle) using TaskParams?
 ~~No you can't. You have to find yourself a different way to do it. Either store it in ``` SharedPreferences ``` which you will access from this service or if the data you need are large, store them in DB and load them in your service.~~
-No longer true, since Google Play services 7.8.0, you can pass Bundle using .setExtras(Bundle) to your task.
+
+**No longer true, since Google Play services 7.8.0, you can pass Bundle using .setExtras(Bundle) to your task.**
 
 ### Can I get the queque of the tasks from in-app?
 Again, for now, you can't. There is no API for getting list of your scheduled tasks. Only option that comes to my mind now is to execute the command mentioned above and parse the data from it. Otherwise, we have to wait for Google to implement it.
