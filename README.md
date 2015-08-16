@@ -3,16 +3,16 @@ An example for GCMNetworkManager introduced on I/O 2015
 
 Use the code below together with the example provided to schedule a OneOff task from your Activity, Fragment, anywhere
 ```
-DataUpdateService.scheduleOneOff(context);
+MyTaskService.scheduleOneOff(context);
 ```
 And the code below to schedule repeating task that persists after reboot
 ```
-DataUpdateService.scheduleRepeat(context);
+MyTaskService.scheduleRepeat(context);
 ```
 
 Use
 ```
-adb shell dumpsys activity service GcmService --endpoints DataUpdateService
+adb shell dumpsys activity service GcmService --endpoints MyTaskService
 ```
 to check for scheduled tasks from your PC (replace DataUpdateService with your service class name)
 
@@ -50,16 +50,10 @@ So first, what can you return there. You have three options: ```GcmNetworkManage
 ```GcmNetworkManager.RESULT_SUCCESS``` : means your task completed succesfully, it won't be rescheduled (because why), behaviour is the same as for ```GcmNetworkManager.RESULT_FAILURE```<br/>
 ```GcmNetworkManager.RESULT_RESCHEDULE``` : mean your task failed, reschedules your task, so it will be executed again when conditions are met<br/>
 
-<<<<<<< HEAD
+
 ### Can I pass something (eg. Bundle) using TaskParams?
 ~~No you can't. You have to find yourself a different way to do it. Either store it in ``` SharedPreferences ``` which you will access from this service or if the data you need are large, store them in DB and load them in your service.~~
 No longer true, since Google Play services 7.8.0, you can pass Bundle using .setExtras(Bundle) to your task.
-=======
-NOTICE: I have been testing this for short time, so correct me if I am wrong
-
-### Can I pass something (eg. Bundle) using TaskParams?
-No you can't. You have to find yourself a different way to do it. Either store it in ``` SharedPreferences ``` which you will access from this service or if the data you need are large, store them in DB and load them in your service.
->>>>>>> origin/master
 
 ### Can I get the queque of the tasks from in-app?
 Again, for now, you can't. There is no API for getting list of your scheduled tasks. Only option that comes to my mind now is to execute the command mentioned above and parse the data from it. Otherwise, we have to wait for Google to implement it.
