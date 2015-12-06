@@ -1,8 +1,10 @@
 # GcmNetworkManager example
-### NOTICE: information based on GPS v7.8.0
+### NOTICE: information based on GPS v8.3.0
 
 **An example for GCMNetworkManager introduced on I/O 2015
 I wrote a nice blogpost about using this API, check it out http://jacktech24.blogspot.cz/2015/08/working-with-gcmnetworkmanager-on.html**
+
+### If you wan't nice library using this API together with Job Scheduler and Alarm Manager, try this one https://github.com/evernote/android-job
 
 Use the code below together with the example provided to schedule a OneOff task from your Activity, Fragment, anywhere
 ```java
