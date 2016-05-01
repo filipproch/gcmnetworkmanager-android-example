@@ -64,7 +64,7 @@ This API is built for it, but you can use it whatever you want. You just need to
 3. the time during which your task is executed is approximate, although the service is trying to execute the task in specified interval, sometimes it's executed after the interval so don't forget it
 
 ### Persistent tasks upon reboots
-You can make your tasks persistent upon reboots by setting ```setPersisted(true)``` but don't forget to add ```RECEIVE_BOOT_COMPLETED``` permission to your manifest
+You can make your tasks persistent upon reboots by setting ```setPersisted(true)``` but don't forget to add ```RECEIVE_BOOT_COMPLETED``` permission to your manifest. Also, only the following extra parameter types are supported: Integer, Long, Double, String, and Boolean.
 
 ### What to return from onRunTask? Differences
 So first, what can you return there. You have three options: ```GcmNetworkManager.RESULT_FAILURE```, ```GcmNetworkManager.RESULT_SUCCESS``` and ```GcmNetworkManager.RESULT_RESCHEDULE```
